@@ -1,0 +1,22 @@
+{
+  "name": "react-query-presentation-2",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.39",
+    "@types/react-dom": "17.0.11",
+    "@vitejs/plugin-react": "1.3.0",
+    "typescript": "4.6.3",
+    "vite": "2.9.5"
+  }
+}
