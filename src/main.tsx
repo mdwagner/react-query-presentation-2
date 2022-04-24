@@ -16,23 +16,29 @@ import {
     const { server } = await import("./mocks/server");
     server.start();
   }
-})();
-
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Navigate to="/react-vanilla" replace />} />
-          <Route path="react-vanilla" element={<ReactVanilla />} />
-          <Route path="redux-traditional" element={<ReduxTraditional />} />
-          <Route path="redux-toolkit" element={<ReduxToolkit />} />
-          <Route path="react-query-basic" element={<ReactQueryBasic />} />
-          <Route path="react-query-advanced" element={<ReactQueryAdvanced />} />
-          <Route path="*" element={<Navigate to="/react-vanilla" replace />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+})().then(() => {
+  ReactDOM.render(
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Navigate to="/react-vanilla" replace />} />
+            <Route path="react-vanilla" element={<ReactVanilla />} />
+            <Route path="redux-traditional" element={<ReduxTraditional />} />
+            <Route path="redux-toolkit" element={<ReduxToolkit />} />
+            <Route path="react-query-basic" element={<ReactQueryBasic />} />
+            <Route
+              path="react-query-advanced"
+              element={<ReactQueryAdvanced />}
+            />
+            <Route
+              path="*"
+              element={<Navigate to="/react-vanilla" replace />}
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>,
+    document.getElementById("root")
+  );
+});
