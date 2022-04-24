@@ -190,7 +190,7 @@ function removeTodo(
   };
 }
 
-function ReduxTraditionalComponent() {
+function ReduxTraditional() {
   const state = useSelector((rootState: RootState) => rootState);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -274,10 +274,12 @@ function ReduxTraditionalComponent() {
   );
 }
 
-export function ReduxTraditional() {
+function ReduxTraditionalRoot() {
   return (
     <Provider store={store}>
-      <ReduxTraditionalComponent />
+      <ReduxTraditional />
     </Provider>
   );
 }
+
+export default ReduxTraditionalRoot;

@@ -1,5 +1,5 @@
 export * from "./ReactVanilla";
-export * from "./ReduxTraditional";
-export * from "./ReduxToolkit";
+export { default as ReduxTraditional } from "./ReduxTraditional";
+export { default as ReduxToolkit } from "./ReduxToolkit";
 export * from "./ReactQueryBasic";
 export * from "./ReactQueryAdvanced";
