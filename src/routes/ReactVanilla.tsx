@@ -56,6 +56,12 @@ export function ReactVanilla() {
         title,
       }),
     })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        return response.json();
+      })
       .then(() => {
         forceUpdate();
       })
@@ -72,6 +78,12 @@ export function ReactVanilla() {
         title: todo.title,
       }),
     })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        return response.json();
+      })
       .then(() => {
         setTempTodo(null);
         forceUpdate();
