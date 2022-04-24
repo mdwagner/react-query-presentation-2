@@ -93,10 +93,6 @@ export function ReactVanilla() {
       });
   }
 
-  function setupEditTodo(todo: Todo) {
-    setTempTodo(todo);
-  }
-
   if (loading) {
     return <>Loading...</>;
   }
@@ -151,7 +147,7 @@ export function ReactVanilla() {
               <span>{t.title}</span>
               <button
                 className="px-3 ml-2 text-white bg-red-400 hover:bg-red-600 rounded-xl"
-                onClick={() => setupEditTodo(t)}
+                onClick={() => setTempTodo(t)}
               >
                 Edit
               </button>
