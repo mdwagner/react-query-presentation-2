@@ -1,5 +1,7 @@
+import { faker } from "@faker-js/faker";
 import { rest, setupWorker } from "msw";
-import type { Todo } from "../typings";
+
+import type { Todo, User, Team, Project } from "../typings";
 
 let id = 0;
 
@@ -12,6 +14,44 @@ const todos: Todo[] = [
   { id: createId(), title: "Do homework" },
   { id: createId(), title: "Go to grocery store" },
 ];
+
+function createArray<T>(count: number, cb: () => T): T[] {
+  return Array.from(Array(count), cb);
+}
+
+const users = createArray<User>(5, () => {
+  const firstName = faker.name.firstName();
+  const lastName = faker.name.lastName();
+  return {
+    id: faker.datatype.uuid(),
+    firstName,
+    lastName,
+    userName: faker.internet.userName(firstName, lastName),
+    age: faker.datatype.number({ min: 18, max: 80 }),
+    avatarUrl: faker.internet.avatar(),
+    email: faker.internet.email(firstName, lastName),
+  };
+});
+const teams = createArray<Team>(3, () => {
+  const userIds = users.map(({ id }) => id);
+  const members = faker.random.arrayElements(userIds);
+  return {
+    id: faker.datatype.uuid(),
+    name: faker.hacker.abbreviation(),
+    department: faker.commerce.department(),
+    members,
+  };
+});
+const projects = createArray<Project>(4, () => {
+  const teamIds = teams.map(({ id }) => id);
+  const team = faker.random.arrayElement(teamIds);
+  return {
+    id: faker.datatype.uuid(),
+    name: faker.commerce.productName(),
+    goalStatement: faker.company.bs(),
+    team,
+  };
+});
 
 const handlers = [
   rest.get("/todos", (_req, res, ctx) => {
@@ -51,6 +91,15 @@ const handlers = [
     } catch (_e) {
       return res(ctx.delay(), ctx.status(500), ctx.json({ status: "error" }));
     }
+  }),
+  rest.get("/users", (_req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(200), ctx.json(users));
+  }),
+  rest.get("/teams", (_req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(200), ctx.json(teams));
+  }),
+  rest.get("/projects", (_req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(200), ctx.json(projects));
   }),
 ];
 
