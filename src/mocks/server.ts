@@ -16,18 +16,18 @@ const todos: Todo[] = [
 const handlers = [
   rest.get("/todos", (_req, res, ctx) => {
     try {
-      return res(ctx.status(200), ctx.json(todos));
+      return res(ctx.delay(), ctx.status(200), ctx.json(todos));
     } catch (_e) {
-      return res(ctx.status(500), ctx.json({ status: "error" }));
+      return res(ctx.delay(), ctx.status(500), ctx.json({ status: "error" }));
     }
   }),
   rest.post("/todos", (req, res, ctx) => {
     try {
       const { title } = JSON.parse(req.body as any);
       todos.push({ id: createId(), title });
-      return res(ctx.status(200), ctx.json({ status: "success" }));
+      return res(ctx.delay(), ctx.status(200), ctx.json({ status: "success" }));
     } catch (_e) {
-      return res(ctx.status(500), ctx.json({ status: "error" }));
+      return res(ctx.delay(), ctx.status(500), ctx.json({ status: "error" }));
     }
   }),
   rest.patch("/todos/:id", (req, res, ctx) => {
@@ -36,9 +36,9 @@ const handlers = [
       const { title } = JSON.parse(req.body as any);
       const todo = todos.find((t) => t.id == id)!;
       todo.title = title;
-      return res(ctx.status(200), ctx.json({ status: "success" }));
+      return res(ctx.delay(), ctx.status(200), ctx.json({ status: "success" }));
     } catch (_e) {
-      return res(ctx.status(500), ctx.json({ status: "error" }));
+      return res(ctx.delay(), ctx.status(500), ctx.json({ status: "error" }));
     }
   }),
   rest.delete("/todos/:id", (req, res, ctx) => {
@@ -47,9 +47,9 @@ const handlers = [
       const filtered = todos.filter((t) => t.id != id);
       todos.length = 0;
       todos.push(...filtered);
-      return res(ctx.status(200), ctx.json({ status: "success" }));
+      return res(ctx.delay(), ctx.status(200), ctx.json({ status: "success" }));
     } catch (_e) {
-      return res(ctx.status(500), ctx.json({ status: "error" }));
+      return res(ctx.delay(), ctx.status(500), ctx.json({ status: "error" }));
     }
   }),
 ];
